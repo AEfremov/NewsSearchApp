@@ -23,16 +23,16 @@ const val NEWS_API_KEY = "0e215c655bc546118bff36479df65baf"
 
 interface NewsApi {
 
-    @GET("/everything")
-    fun everything(
+    @GET("everything")
+    suspend fun everything(
         @Query("q") query: String? = null,
         @Query("from") from: Date? = null,
         @Query("to") to: Date? = null,
-        @Query("languages") languages: List<Language>? = null,
+        @Query("languages") languages: List<@JvmSuppressWildcards Language>? = null,
         @Query("sortBy") sortBy: SortBy? = null,
         @Query("pageSize") @IntRange(from = 0, to = 100) pageSize: Int = 100,
         @Query("page") @IntRange(from = 1) page: Int = 1,
-    ): Response<ResponseDTO<ArticleDTO>>
+    ): Result<ResponseDTO<ArticleDTO>>
 }
 
 fun NewsApi(
