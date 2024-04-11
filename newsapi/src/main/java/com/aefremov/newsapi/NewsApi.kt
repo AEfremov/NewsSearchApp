@@ -19,8 +19,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.Date
 
-const val NEWS_API_KEY = "0e215c655bc546118bff36479df65baf"
-
 interface NewsApi {
 
     @GET("everything")

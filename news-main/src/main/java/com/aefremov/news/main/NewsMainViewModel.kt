@@ -3,15 +3,18 @@ package com.aefremov.news.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aefremov.news.data.RequestResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
-internal class NewsMainViewModel(
-    private val getAllArticlesUseCase: GetAllArticlesUseCase
+@HiltViewModel
+internal class NewsMainViewModel @Inject constructor(
+    getAllArticlesUseCase: GetAllArticlesUseCase
 ) : ViewModel() {
 
     val state: StateFlow<State> = getAllArticlesUseCase.invoke(query = "android")
