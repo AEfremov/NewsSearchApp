@@ -11,17 +11,19 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+import javax.inject.Provider
 
 @HiltViewModel
 internal class NewsMainViewModel @Inject constructor(
-    getAllArticlesUseCase: GetAllArticlesUseCase
+    getAllArticlesUseCase: Provider<GetAllArticlesUseCase>
 ) : ViewModel() {
 
-    val state: StateFlow<State> = getAllArticlesUseCase.invoke(query = "android")
+    val state: StateFlow<State> = getAllArticlesUseCase.get().invoke(query = "android")
         .map { it.toState() }
         .stateIn(viewModelScope, SharingStarted.Lazily, State.None)
 
     fun forceUpdate() {
+        TODO("Will not be implemented")
     }
 }
 
